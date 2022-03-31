@@ -38,17 +38,33 @@ class _Screen_expenseState extends State<Screen_expense> {
 
                     itemBuilder: (context, index) {
                      
-                      final int incomeData = expensekey[index];
-                      final ModelCode? income = homey.get(incomeData);
+                      final int expenseData = expensekey[index];
+                      final ModelCode? expense = homey.get(expenseData);
 
                       return Card(
                         child: ListTile(
-                          title: Text(income!.categoryname),
+                          title: Text(expense!.categoryname),
                           subtitle:
-                              Text(income.isExpense ? "income" : "expense"),
-                          trailing: Icon(Icons.circle,
-                              color:
-                                  income.isExpense ? Colors.green : Colors.red),
+                              Text(expense.isExpense ? "income" : "expense"),
+                          trailing: Container(
+                                           
+                                            height: 40,
+                                            width: 80,
+                                            child: Row(
+                                              
+                                              children: [
+                                                IconButton(onPressed: (){
+                                             boxhome.deleteAt(index);
+                                                
+
+                                                  
+                                          }, icon:Icon(Icons.delete) ),
+                                          Icon(Icons.circle,
+                                           color:
+                                               expense.isExpense ? Colors.green : Colors.red),
+                                              ],
+                                            ),
+                                          )
                         ),
                       );
                     },

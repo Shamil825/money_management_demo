@@ -32,11 +32,7 @@ class _Screen_incomeState extends State<Screen_income> {
                       .where(
                           (element) => boxhome.get(element)!.isExpense == true)
                       .toList();
-                  List<int> expensekey = homey.keys
-                      .cast<int>()
-                      .where(
-                          (element) => boxhome.get(element)!.isExpense == false)
-                      .toList();
+                
                   return ListView.separated(
 
                     itemBuilder: (context, index) {
@@ -49,9 +45,25 @@ class _Screen_incomeState extends State<Screen_income> {
                           title: Text(income!.categoryname),
                           subtitle:
                               Text(income.isExpense ? "income" : "expense"),
-                          trailing: Icon(Icons.circle,
-                              color:
-                                  income.isExpense ? Colors.green : Colors.red),
+                          trailing: Container(
+                                           
+                                            height: 40,
+                                            width: 80,
+                                            child: Row(
+                                              
+                                              children: [
+                                                IconButton(onPressed: (){
+                                             boxhome.deleteAt(index);
+                                                
+
+                                                  
+                                          }, icon:Icon(Icons.delete) ),
+                                          Icon(Icons.circle,
+                                           color:
+                                               income.isExpense ? Colors.green : Colors.red),
+                                              ],
+                                            ),
+                                          )
                         ),
                       );
                     },

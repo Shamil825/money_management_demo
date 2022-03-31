@@ -5,8 +5,8 @@ import 'package:money_management_flutter/model/model.dart';
 import 'package:money_management_flutter/screens/category_Screeens/screen_expense.dart';
 import 'package:money_management_flutter/screens/category_Screeens/screen_income.dart';
 
-int? changeindex;
-
+int? changeindex=0;
+bool isIncomeScreen=true;
 class Screem_category extends StatefulWidget {
   const Screem_category({Key? key}) : super(key: key);
 
@@ -16,7 +16,7 @@ class Screem_category extends StatefulWidget {
 
 class _Screem_categoryState extends State<Screem_category>
     with TickerProviderStateMixin {
-  bool isIncomeScreen=true;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -27,19 +27,24 @@ class _Screem_categoryState extends State<Screem_category>
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             
             children: [
-            TextButton(onPressed: (){
+            TextButton(
+              style: ButtonStyle(backgroundColor:MaterialStateProperty.all(changeindex==0?Colors.blue:Colors.white)),
+              onPressed: (){
               isIncomeScreen=true;
               setState(() {
+                changeindex=0;
                 
               });
-            }, child:Text("income"),
+            }, child:Text("income",style:changeindex==0 ?TextStyle(color: Colors.white):TextStyle(color: Colors.blue)),
             ),
-            TextButton(onPressed: (){
+            TextButton(
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(changeindex==1?Colors.blue:Colors.white)),
+              onPressed: (){
               isIncomeScreen=false;
               setState(() {
-                
+                changeindex=1;
               });
-            }, child: Text("expense")),
+            }, child: Text("expense",style:changeindex==1 ?TextStyle(color: Colors.white):TextStyle(color: Colors.blue))),
           ],),
           Expanded(
             child: isIncomeScreen==true?Screen_income():Screen_expense(),
