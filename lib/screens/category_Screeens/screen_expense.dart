@@ -4,6 +4,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:money_management_flutter/main.dart';
 import 'package:money_management_flutter/model/model.dart';
 import 'package:money_management_flutter/screens/screen_category.dart';
+import 'package:money_management_flutter/screens/screen_home.dart';
 
 class Screen_expense extends StatefulWidget {
   const Screen_expense({ Key? key,}) : super(key: key);
@@ -41,35 +42,42 @@ class _Screen_expenseState extends State<Screen_expense> {
                       final int expenseData = expensekey[index];
                       final ModelCode? expense = homey.get(expenseData);
 
-                      return Card(
-                        child: ListTile(
-                          title: Text(expense!.categoryname),
-                          subtitle:
-                              Text(expense.isExpense ? "income" : "expense"),
-                          trailing: Container(
-                                           
-                                            height: 40,
-                                            width: 80,
-                                            child: Row(
-                                              
-                                              children: [
-                                                IconButton(onPressed: (){
-                                             boxhome.deleteAt(index);
-                                                
-
+                      return Container(
+                        child: Card(
+                          child: Container(
+                            color: Color(hexcolor("48CAE4")),
+                            child: ListTile(
+                              
+                              title: Text(expense!.categoryname),
+                              subtitle:
+                                  Text(expense.isExpense ? "income" : "expense"),
+                              trailing: Container(
+                                               
+                                                height: 40,
+                                                width: 80,
+                                                child: Row(
                                                   
-                                          }, icon:Icon(Icons.delete) ),
-                                          Icon(Icons.circle,
-                                           color:
-                                               expense.isExpense ? Colors.green : Colors.red),
-                                              ],
-                                            ),
-                                          )
+                                                  children: [
+                                                    IconButton(onPressed: (){
+                                                 boxhome.deleteAt(index);
+                                                  
+                                                      
+                                              }, icon:Icon(Icons.delete) ),
+                                              Icon(Icons.circle,
+                                               color:
+                                                   expense.isExpense ? Colors.green : Colors.red),
+                                                  ],
+                                                ),
+                                              )
+                            ),
+                          ),
                         ),
                       );
                     },
                     separatorBuilder: (context, index) {
-                      return Divider();
+                      return SizedBox(
+                        height: 2,
+                      );
                     },
                     itemCount:expensekey .length,
                     shrinkWrap: true,
